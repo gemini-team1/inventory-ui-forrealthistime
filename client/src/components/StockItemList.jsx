@@ -61,14 +61,11 @@ class StockItemList extends Component {
       selectedRow: 0,
     };
   }
-
   async componentDidMount() {
-
     this.setState({
-      data: this.data,
-    })
+      data: await this.props.stockService.listStockItems()
+    });
   }
-
   onRowClick = id => {
     this.setState({ selectedRow: id });
   };
@@ -94,7 +91,6 @@ class StockItemList extends Component {
         </div>
         {this.columns.map(col => {
           const format = this.formatters[col] || function(val) { return val; };
-
           return (
             <StructuredListCell key={col} className="simple-list-row">
               {format(row[col])}
@@ -107,7 +103,6 @@ class StockItemList extends Component {
 
   render() {
     const data = this.state.data;
-
     return (
       <div className="bx--grid pattern-container">
         <Header
@@ -130,7 +125,6 @@ class StockItemList extends Component {
                   })}
                 </StructuredListRow>
               </StructuredListHead>
-
               <StructuredListBody>
                 {data.map((row, i) => {
                   return this.renderRow(row, i);

@@ -5,17 +5,16 @@ import StockItemList from "./StockItemList";
 
 class UIShellBody extends Component {
   components = {
-   "Stock Items": StockItemList
+    "Stock Items": StockItemList
   };
-  defaultComponent = "Display Form";
-
+  defaultComponent = "Stock Items";
   render() {
     const PatternName = this.components[
       this.props.patternName || this.defaultComponent
     ];
     return (
       <div className="pattern-container">
-        <PatternName showDescription={true} />
+        <PatternName showDescription={true} stockService={this.props.stockService} />
       </div>
     );
   }
